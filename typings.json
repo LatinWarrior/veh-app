@@ -1,0 +1,10 @@
+{
+  "globalDependencies": {
+    "angular": "registry:dt/angular#1.4.0+20160302143748",
+    "bootstrap": "registry:dt/bootstrap#3.3.5+20160726204056",
+    "jquery": "registry:dt/jquery#2.0.0+20160303223636"
+  },
+  "dependencies": {
+    "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20161222093745"
+  }
+}

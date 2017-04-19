@@ -1,4 +1,3 @@
 /// <reference path="../../../../typings/index.d.ts" />
 
-angular
-        .module('app.demo', []);
+angular.module('app.demo', []);

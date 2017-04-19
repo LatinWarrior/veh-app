@@ -36,13 +36,13 @@ gulp.task('lint', function() {
 gulp.task('scripts', ['clean-dist', 'lint'], function() {
 
 	return gulp
-		.src(['public/src/app/entities/**/*.ts', 
+		.src(['public/src/app/**/*.entity.ts', 
 		'public/src/app/**/*.module.ts', 
 		'public/src/app/**/*.service.ts', 
 		'public/src/app/**/*.component.ts', 
 		'public/src/app/app.ts'])
 		.pipe(debug())
-		.pipe(addStream.obj(prepareTemplates()))
+		// .pipe(addStream.obj(prepareTemplates()))
 		.pipe(sourceMaps.init())
 		.pipe(ts(tsProject))
 		// .pipe(ts({
@@ -52,7 +52,7 @@ gulp.task('scripts', ['clean-dist', 'lint'], function() {
 		// }))
 		.pipe(debug())
 		.pipe(gulp.dest('public/dist'))
-		.pipe(rename('app.min.js'))
+		// .pipe(rename('app.min.js'))
 		//.pipe(uglify())
 		.pipe(sourceMaps.write('.'))
 		.pipe(gulp.dest('public/dist'));

@@ -1,14 +1,14 @@
 {
     "compilerOptions": {
         "target": "es5",        
+        "module": "umd",
         "sourceMap": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "removeComments": true,
         "noImplicitAny": true,
         "listEmittedFiles": true,
-        "listFiles": true,
-        "out": "app.js"
+        "listFiles": true
     },
     "include": [
         "public/src/app/app.ts",

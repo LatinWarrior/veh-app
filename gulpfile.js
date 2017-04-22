@@ -92,21 +92,21 @@ gulp.task('cssNano', ['sass', 'concatCss'], function () {
 		.pipe(gulp.dest('public/dist'));
 });
 
-gulp.task('copyLibs', function () {
+gulp.task('copy-libs', function () {
 	return gulp
 		.src(['public/lib/**/*.min.js', 'public/lib/**/*.min.css', 'public/lib/**/fontawesome*.*'])
 		.pipe(debug())
 		.pipe(gulp.dest('public/dist/lib'));
 });
 
-gulp.task('copyFiles', function () {
+gulp.task('copy-files', function () {
 	return gulp
-		.src(['public/index.html', 'public/src/app/**/*.html', 'public/src/app/**/*.json'])
+		.src(['public/src/css/*.css', 'public/src/app/**/*.html', 'public/src/app/**/*.json'])
 		.pipe(debug())
 		.pipe(gulp.dest('public/dist'));
 });
 
-gulp.task('copyLayoutFile', function () {
+gulp.task('copy-layout-file', function () {
 	return gulp
 		.src(['public/layout/topnav.html'])
 		.pipe(debug())
@@ -195,7 +195,7 @@ gulp.task('inject', function () {
 
 });
 
-gulp.task('serve-dev', ['scripts', 'copyLibs', 'copyFiles', 'copyLayoutFile', 'inject'], function() {
+gulp.task('serve-dev', ['scripts', 'copy-libs', 'copy-files', 'copy-layout-file', 'inject'], function() {
 
 });
 
@@ -253,7 +253,7 @@ function log(msg) {
 	}
 }
 
-gulp.task('serve', ['scripts', 'copyLayoutFile', 'copyLibs', 'copyFiles', 'inject'], function () {
+gulp.task('serve', ['scripts', 'copy-layout-file', 'copy-libs', 'copy-files', 'inject'], function () {
 
 	var options = {
 		restartable: "rs",

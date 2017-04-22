@@ -49,7 +49,7 @@ gulp.task('scripts', ['clean-dist', 'lint'], function () {
 
 	return gulp
 		.src([
-			'public/src.app/app.module.ts',
+			'public/src/app/app.module.ts',
 			'public/src/app/**/*.entity.ts',
 			'public/src/app/**/*.module.ts',
 			'public/src/app/**/*.service.ts',
@@ -92,16 +92,16 @@ gulp.task('cssNano', ['sass', 'concatCss'], function () {
 		.pipe(gulp.dest('public/dist'));
 });
 
-gulp.task('copyExternalLibraries', function () {
+gulp.task('copyLibs', function () {
 	return gulp
-		.src(['public/lib/**/*.min.js'])
+		.src(['public/lib/**/*.min.js', 'public/lib/**/*.min.css'])
 		.pipe(debug())
 		.pipe(gulp.dest('public/dist/lib'));
 });
 
-gulp.task('copyProjectFiles', function () {
+gulp.task('copyFiles', function () {
 	return gulp
-		.src(['public/dist/**/*.html', 'public/dist/**/*.json'])
+		.src(['public/index.html', 'public/src/app/**/*.html', 'public/src/app/**/*.json'])
 		.pipe(debug())
 		.pipe(gulp.dest('public/dist'));
 });
@@ -134,7 +134,7 @@ gulp.task('clean', function () {
 });
 
 // Inject dist + bower lib files
-gulp.task('inject', ['scripts'], function () {
+gulp.task('inject', function () {
 
 	// inject our dist files
 	// var injectSrc = gulp.src([
@@ -185,12 +185,16 @@ gulp.task('inject', ['scripts'], function () {
 		'public/dist/**/*.js'
 	];
 
-	return gulp.src('./public/*.html')
+	return gulp.src('./public/index.html')
 		.pipe(wiredep(options))
 		.pipe(debug())
 		.pipe(inject(injectSrc, '', jsOrder))
 		.pipe(debug())
-		.pipe(gulp.dest('./public/dist'));
+		.pipe(gulp.dest('./public'));
+
+});
+
+gulp.task('serve-dev', ['scripts', 'copyLibs', 'copyFiles', 'copyLayoutFile', 'inject'], function() {
 
 });
 
@@ -243,7 +247,7 @@ function log(msg) {
 	}
 }
 
-gulp.task('serve', ['scripts', 'copyLayoutFile', 'copyExternalLibraries', 'copyProjectFiles', 'inject'], function () {
+gulp.task('serve', ['scripts', 'copyLayoutFile', 'copyLibs', 'copyFiles', 'inject'], function () {
 
 	var options = {
 		restartable: "rs",

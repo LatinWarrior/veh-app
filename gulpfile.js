@@ -94,7 +94,7 @@ gulp.task('cssNano', ['sass', 'concatCss'], function () {
 
 gulp.task('copyLibs', function () {
 	return gulp
-		.src(['public/lib/**/*.min.js', 'public/lib/**/*.min.css'])
+		.src(['public/lib/**/*.min.js', 'public/lib/**/*.min.css', 'public/lib/**/fontawesome*.*'])
 		.pipe(debug())
 		.pipe(gulp.dest('public/dist/lib'));
 });
@@ -178,11 +178,12 @@ gulp.task('inject', function () {
 	};
 
 	var jsOrder = [
-		'public/dist/app.module.js',
-		'public/dist/**/*.module.js',
-		'public/dist/**/*.service.js',
-		'public/dist/**/*.component.js',
-		'public/dist/**/*.js'
+		'**/app.module.js',
+		'**/*.entity.js',
+		'**/*.module.js',
+		'**/*.service.js',
+		'**/*.component.js',
+		'**/*.js'
 	];
 
 	return gulp.src('./public/index.html')
@@ -206,6 +207,10 @@ gulp.task('serve-dev', ['scripts', 'copyLibs', 'copyFiles', 'copyLayoutFile', 'i
  * @returns {Stream}   The stream
  */
 function inject(src, label, order) {
+
+	log('src: ', src);
+	log('order: ', order);
+
 	var options = { read: false, ignorePath: '/public' };
 	if (label) {
 		options.name = 'inject:' + label;
@@ -221,9 +226,10 @@ function inject(src, label, order) {
  * @returns {Stream} The ordered stream
  */
 function orderSrc(src, order) {
-	//order = order || ['**/*'];
+	// order = order || ['**/*'];
 
 	log('src: ', src);
+	log('order: ', order);
 
 	return gulp
 		.src(src)
@@ -239,11 +245,11 @@ function log(msg) {
 	if (typeof (msg) === 'object') {
 		for (var item in msg) {
 			if (msg.hasOwnProperty(item)) {
-				$.util.log($.util.colors.blue(msg[item]));
+				$.util.log($.util.colors.yellow(msg[item]));
 			}
 		}
 	} else {
-		$.util.log($.util.colors.blue(msg));
+		$.util.log($.util.colors.yellow(msg));
 	}
 }
 

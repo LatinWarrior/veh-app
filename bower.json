@@ -16,16 +16,16 @@
         "dist/css/bootstrap-theme.min.css",
         "dist/js/bootstrap.min.js"
       ]
-    },
-    "foundation": {
-      "main": [
-        "css/foundation.css",
-        "js/foundation.js"
-      ]
-    },
+    },    
     "font-awesome": {
       "main": [
-        "css/font-awesome.css"
+        "css/font-awesome.min.css",
+        "fonts/fontawesome-webfont.eot",
+        "fonts/fontawesome-webfont.svg",
+        "fonts/fontawesome-webfont.ttf",
+        "fonts/fontawesome-webfont.woff",
+        "fonts/fontawesome-webfont.woff2",
+        "fonts/Fontawesome.otf"
       ]
     },
     "angular": {

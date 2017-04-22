@@ -1,4 +1,4 @@
-import { IVehicleModel } from './vehicle-model';
+import { IVehicleModel } from './vehicle-model.entity';
 
 export interface IVehicle {
     id: number;

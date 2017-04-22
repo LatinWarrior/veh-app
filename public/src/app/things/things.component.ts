@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/index.d.ts" />
 
-import { ICompany, Company } from '.././entities/company';
+import { ICompany, Company } from '.././entities/company.entity';
 
 // usage: <things></things>
 

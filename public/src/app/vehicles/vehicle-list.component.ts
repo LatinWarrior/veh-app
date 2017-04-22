@@ -1,6 +1,6 @@
 /// <reference path="../../../../typings/index.d.ts" />
 
-import { IVehicle } from '.././entities/vehicle';
+import { IVehicle } from '.././entities/vehicle.entity';
 import { IDataAccessService, DataAccessService } from '.././services/data-access.service';
 
 module app.vehicle {

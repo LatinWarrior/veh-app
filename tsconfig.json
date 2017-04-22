@@ -6,20 +6,17 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "removeComments": true,
-        "noImplicitAny": true,
-        "listEmittedFiles": true,
+        "noImplicitAny": true,    
         "listFiles": true
     },
-    "include": [
+    "filesGlob": [
         "public/src/app/app.ts",
         "public/src/app/**/*.ts",
-        "typings/index.d.ts"
-    ],
-    "exclude": [
-        "node_modules",
-        "typings/globals/**/*.d.ts",
-        "typings/modules",
-        "dist",
-        "lib"
-    ]
+        "typings/index.d.ts",
+        "!node_modules",
+        "!typings/globals",
+        "!typings/modules",
+        "!public/dist",
+        "!public/lib"
+    ]    
 }

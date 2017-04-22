@@ -1,4 +1,4 @@
-import { IModelYear } from './model-year';
+import { IModelYear } from './model-year.entity';
 
 export interface IVehicleModel {
     id: string;

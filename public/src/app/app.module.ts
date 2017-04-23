@@ -2,7 +2,7 @@
 
 // import { IStateProvider, IUrlRouterProvider } from 'angular-ui-router';
 
-var apiConfig = require("./constants/edmunds.config")();
+//var apiConfig = require("./constants/edmunds.config")();
 
 namespace app {
 
@@ -51,6 +51,7 @@ namespace app {
                 resolve: {
                     vehicle: function(dataAccessService: app.service.IDataAccessService, 
                     $stateParams: ng.ui.IStateParams){
+                        var x = dataAccessService.getApiInfo();
                         return dataAccessService.getVehicle($stateParams.id);
                     }
                 }
@@ -74,6 +75,22 @@ namespace app {
         }
     }
 
+    export class ApiConstants {
+
+        public apiInfo: any;
+
+        static $inject: Array<string> = ['dataAccessService'];        
+        constructor(dataAccessService: app.service.IDataAccessService){    
+            dataAccessService.getApiInfo().then((response:any ) => {
+                this.apiInfo = response;
+            })
+        }
+
+        public getApiInfo() {
+            return this.apiInfo;
+        }
+    }
+
     angular
         .module('app', [
             'app.entity',
@@ -82,8 +99,8 @@ namespace app {
             'ui.router',
             'app.vehicle'
         ])        
-        .config(Config)
-        .constant('apiKey', apiConfig.key);        
+        .config(Config);
+        //.constant('apiConstants', () => ApiConstants);        
 
     // your app setup here
 }

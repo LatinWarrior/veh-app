@@ -8,6 +8,7 @@ namespace app.service {
     export interface IDataAccessService {
         getVehicles(): ng.IPromise<Array<app.entity.IVehicle>>;
         getVehicle(id: number): ng.IPromise<app.entity.IVehicle>;
+        getApiInfo: () => ng.IPromise<any>;
     }
 
     export class DataAccessService implements IDataAccessService {
@@ -17,7 +18,8 @@ namespace app.service {
         */
 
         private vehiclesUrl: string = '.././data/makes.json';
-        private vehicleUrl: string = 'https://api.edmunds.com/api/vehicle/v2/honda/models?fmt=json&api_key=jgw7g2fhzhadwmhddbc6uuud';
+        private vehicleUrl: string = 'https://api.edmunds.com/api/vehicle/v2/honda/models?fmt=json&api_key=';
+        private apiKeyUrl: string = '.././constants/edmunds.config.json';
 
         static $inject = ['$http'];
         constructor(private $http: ng.IHttpProvider) {
@@ -36,9 +38,20 @@ namespace app.service {
         }
 
         getVehicle: (id: number) => ng.IPromise<app.entity.IVehicle> = (id: number) => {
-            return this.$http.get(this.vehicleUrl).then((response: any) => {
-                return null;
-            })
+
+            this.getApiInfo().then((response: any) => {
+                let api = response.data.config;
+                let url = this.vehicleUrl + api.key;
+                return this.$http.get(url).then((response: any) => {
+                    return response.data.models;
+                });
+            });
+        }
+
+        getApiInfo: () => ng.IPromise<any> = () => {
+            return this.$http.get(this.apiKeyUrl).then((response: any) => {
+                return response;
+            });
         }
 
         // static vehicleService($http: ng.IHttpProvider) {

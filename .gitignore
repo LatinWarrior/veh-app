@@ -2,7 +2,9 @@
 
 # edmunds stuff
 edmunds.config.js
+edmunds.config.json
 /public/src/constants/edmunds.config.js
+/public/src/constants/edmunds.config.json
 
 # compiled output
 /dist

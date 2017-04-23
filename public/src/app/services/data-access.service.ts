@@ -16,7 +16,7 @@ namespace app.service {
         */
 
         private vehiclesUrl: string = '.././data/makes.json';
-
+        static $inject = ['$http'];
         constructor(private $http: ng.IHttpProvider) {
             console.log(`In constructor of data-access.services`);
         }
@@ -24,24 +24,24 @@ namespace app.service {
         getVehicles: () => ng.IPromise<Array<app.entity.IVehicle>> = () => {
             return this
                 .$http
-                .$get(this.vehiclesUrl)
+                .get(this.vehiclesUrl)
                 .then((response: any) => {
-                    const vehicles = response.json().data as Array<IVehicle>;
+                    const vehicles = response.data as Array<app.entity.IVehicle>;
                     console.log(`In getVehicles of data-access.services. vehicles: ${vehicles}`);
                     return vehicles;
                 });
         }
 
-        static vehicleService($http: ng.IHttpProvider) {
-            console.log(`In static vehicleService method of data-access.services`);
-            return new DataAccessService($http);
-        }
+        // static vehicleService($http: ng.IHttpProvider) {
+        //     console.log(`In static vehicleService method of data-access.services`);
+        //     return new DataAccessService($http);
+        // }
     }
 
-    DataAccessService.vehicleService.$inject = ['$http']
+    //DataAccessService.vehicleService.$inject = ['$http']
 
     angular
         .module('app.service')
-        .service('dataAccessService', () => DataAccessService.vehicleService);
+        .service('dataAccessService', DataAccessService);
 }
 

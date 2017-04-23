@@ -1,4 +1,4 @@
-Hello world!
+
 
 <div class="panel panel-primary">
     <div class="panel-heading" style="font-size:large">
@@ -9,13 +9,11 @@ Hello world!
             <thead>
                 <tr>
                     <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>Name</td>                    
                     <tbody>
                         <tr ng-repeat="vehicle in $ctrl.vehicles">
-                            <td>{{vehicle.name}}</td>
-                            <td></td>
-                            <td></td>
+                            <td><a ui-sref="vehicle"></a>{{vehicle.id}}</td>
+                            <td>{{vehicle.name}}</td>                            
                         </tr>
                     </tbody>
                 </tr>

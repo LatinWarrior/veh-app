@@ -1,5 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# edmunds stuff
+edmunds.config.js
+/public/src/constants/edmunds.config.js
+
 # compiled output
 /dist
 /tmp

@@ -12,14 +12,16 @@ namespace app.vehicle {
     }
 // 
     interface IVehicleListController extends IVehicleListBindings {
-
+        //vehicles: Array<app.entity.IVehicle>;
+        title: string;
     }
 
     class VehicleListController implements IVehicleListController {
 
         private vehicles: Array<app.entity.IVehicle>;
+        public title: string;
 
-        static $inject = ['dataAccessService', '$http'];
+        static $inject = ['dataAccessService'];
         constructor(private dataAccessService: app.service.IDataAccessService) {
             console.log('In constructor of VehicleListController');
         }
@@ -28,8 +30,9 @@ namespace app.vehicle {
 
             console.log('In $onInit of VehicleListController');
 
-            this
-                .dataAccessService
+            this.title = "Vehicles";
+
+            this.dataAccessService
                 .getVehicles()
                 .then((vehicles: Array<app.entity.IVehicle>) => {
                     console.log(`In $onInit. vehicles: ${vehicles}`);

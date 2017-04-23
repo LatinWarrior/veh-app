@@ -1,11 +1,17 @@
+// public/src/app/entities/model-year.entity.ts
 
-export interface IModelYear {
-    id: number;
-    year: number;
-}
+namespace app.entity {
 
-export default class ModelYear implements IModelYear {
-    constructor(public id: number, public year: number) {
-
+    export interface IModelYear {
+        id: number;
+        year: number;
     }
+
+    export class ModelYear implements IModelYear {
+        constructor(public id: number, public year: number) {
+
+        }
+    }
+
+    angular.module('app.entity');
 }

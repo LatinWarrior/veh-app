@@ -1,26 +1,26 @@
 /// <reference path="../../../../typings/index.d.ts" />
 
-import { IVehicle } from '.././entities/vehicle.entity';
-import { IDataAccessService, DataAccessService } from '.././services/data-access.service';
+// import { IVehicle } from '.././entities/vehicle.entity';
+// import { IDataAccessService, DataAccessService } from '.././services/data-access.service';
 
-module app.vehicle {
+namespace app.vehicle {
 
     'use strict';
 
     interface IVehicleListBindings {
 
     }
-
+// 
     interface IVehicleListController extends IVehicleListBindings {
 
     }
 
     class VehicleListController implements IVehicleListController {
 
-        private vehicles: Array<IVehicle>;
+        private vehicles: Array<app.entity.IVehicle>;
 
         static $inject = ['dataAccessService', '$http'];
-        constructor(private dataAccessService: IDataAccessService) {
+        constructor(private dataAccessService: app.service.IDataAccessService) {
             console.log('In constructor of VehicleListController');
         }
 
@@ -31,7 +31,7 @@ module app.vehicle {
             this
                 .dataAccessService
                 .getVehicles()
-                .then((vehicles: Array<IVehicle>) => {
+                .then((vehicles: Array<app.entity.IVehicle>) => {
                     console.log(`In $onInit. vehicles: ${vehicles}`);
                     this.vehicles = vehicles;
                 });
@@ -40,7 +40,6 @@ module app.vehicle {
         $onChanges: (changes: any) => void = (changes: any) => {
             console.log(`In $onChanges. changes: ${changes}`);
         }
-
     }
 
     export class VehicleListComponent implements ng.IComponentOptions {

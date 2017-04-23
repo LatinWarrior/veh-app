@@ -1,10 +1,12 @@
 /// <reference path="../../../../typings/index.d.ts" />
 
-import { IVehicle } from '.././entities/vehicle.entity';
+//import { IVehicle } from '.././entities/vehicle.entity';
 //import { Http } from 'angular'
 
+namespace app.service {
+
     export interface IDataAccessService {
-        getVehicles(): ng.IPromise<Array<IVehicle>>;
+        getVehicles(): ng.IPromise<Array<app.entity.IVehicle>>;
     }
 
     export class DataAccessService implements IDataAccessService {
@@ -19,7 +21,7 @@ import { IVehicle } from '.././entities/vehicle.entity';
             console.log(`In constructor of data-access.services`);
         }
 
-        getVehicles: () => ng.IPromise<Array<IVehicle>> = () => {
+        getVehicles: () => ng.IPromise<Array<app.entity.IVehicle>> = () => {
             return this
                 .$http
                 .$get(this.vehiclesUrl)
@@ -41,4 +43,5 @@ import { IVehicle } from '.././entities/vehicle.entity';
     angular
         .module('app.service')
         .service('dataAccessService', () => DataAccessService.vehicleService);
+}
 

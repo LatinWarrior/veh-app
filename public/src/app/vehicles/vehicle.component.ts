@@ -32,7 +32,7 @@ export class VehicleComponent implements ng.IComponentOptions {
 
         };
         this.controller = VehicleController;
-        this.templateUrl = './vehicle.component.html'
+        this.templateUrl = './vehicles/vehicle.component.html'
     }
 }
 

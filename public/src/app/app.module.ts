@@ -32,7 +32,7 @@ namespace app {
             let demoState = {
                 name: 'demo',
                 url: '/demo',
-                templateUrl: 'src/demo/demo.html'
+                template: '<demo></demo>'
             }
 
             let vehicleListState = {

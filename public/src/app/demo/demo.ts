@@ -4,29 +4,39 @@ module app.demo {
 
     'use strict';
 
-    export interface IDemoCtrl { }
-    export class DemoCtrl implements IDemoCtrl {
-        constructor(
-            public $scope: ng.IScope
-        ) { }
+    interface IDemoBindings {
+
     }
 
-    export interface IDemoService {
-        getExcited: boolean;
+    interface IDemoController extends IDemoBindings {
+        public getExcited: boolean = false;
     }
-    export class DemoService implements IDemoService {
-        getExcited: boolean = false;
+
+    class DemoController implements IDemoController {
+
+        public getExcited: boolean = false;
+
+        constructor() {
+
+        }
+    }    
+
+    export class DemoComponent implements ng.IComponentOptions {
+
+        public bindings: any;
+        public controller: any;
+        public templateUrl: string;
+
+        constructor() {
+            this.bindings = {
+
+            };
+            this.controller = DemoController;
+            this.templateUrl = './DemoService.html'
+        }
     }
 
     angular
         .module('app.demo')
-        .directive("demo", function (): ng.IDirective {
-            return {
-                templateUrl: 'src/app/demo/demo.html',
-                controller: DemoCtrl,
-                controllerAs: 'demoCtrlVM'
-            };
-        })
-        .controller("demoCtrl", DemoCtrl)
-        .factory("demoService", [() => new app.demo.DemoService()]);
+        .component("demo", [() => new DemoComponent()]);
 }

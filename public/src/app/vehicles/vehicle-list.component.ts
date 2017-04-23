@@ -58,11 +58,11 @@ namespace app.vehicle {
 
             };
             this.controller = VehicleListController;
-            this.templateUrl = './vehicle-list.component.html'
+            this.templateUrl = './vehicles/vehicle-list.component.html'
         }
     }
 
     angular
         .module('app.vehicle')
-        .component('vehicleList', () => new VehicleListComponent());
+        .component('vehicleList', new VehicleListComponent());
 }

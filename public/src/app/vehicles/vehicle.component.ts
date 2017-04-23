@@ -1,9 +1,11 @@
 /// <reference path="../../../../typings/index.d.ts" />
 
-import { IVehicle } from '.././entities/vehicle.entity';
+//import { IVehicle } from '.././entities/vehicle.entity';
+
+namespace app.vehicle {
 
 interface IVehicleBindings {
-    vehicle: IVehicle;
+    vehicle: app.entity.IVehicle;
 }
 
 interface IVehicleController extends IVehicleBindings {
@@ -12,7 +14,7 @@ interface IVehicleController extends IVehicleBindings {
 
 class VehicleController implements IVehicleController {
 
-    constructor(public vehicle: IVehicle) {
+    constructor(public vehicle: app.entity.IVehicle) {
         console.log('In constructor of VehicleController');
     }
 }
@@ -30,12 +32,13 @@ export class VehicleComponent implements ng.IComponentOptions {
 
         };
         this.controller = VehicleController;
-        this.templateUrl = 'src/app/vehicles/vehicle.component.html'
+        this.templateUrl = './vehicle.component.html'
     }
 }
 
 angular
     .module('app.vehicle')
     .component('vehicle', () => new VehicleComponent());
+}
 
 

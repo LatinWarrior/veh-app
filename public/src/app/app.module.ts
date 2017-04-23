@@ -1,6 +1,6 @@
 /// <reference path="../../../typings/index.d.ts" />
 
-import { IStateProvider, IUrlRouterProvider } from 'angular-ui-router';
+// import { IStateProvider, IUrlRouterProvider } from 'angular-ui-router';
 
 namespace app {
 
@@ -8,9 +8,9 @@ namespace app {
 
     export class Config {
 
-        static $inject: Array<string> = ['stateProvider', 'urlRouterProvider'];
+        static $inject: Array<string> = ['$stateProvider', '$urlRouterProvider'];
 
-        constructor($stateProvider: IStateProvider, $urlRouterProvider: IUrlRouterProvider){
+        constructor($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider){
             let helloState = {
                 name: 'home',
                 url: '/home',
@@ -62,8 +62,7 @@ namespace app {
         .module('app', [
             'app.entity',
             'app.demo',
-            'app.galaxy',
-            'app.templates',
+            'app.galaxy',            
             'ui.router',
             'app.vehicle'
         ])        

@@ -30,17 +30,17 @@
     },
     "angular": {
       "main": [
-        "angular.min.js"
+        "angular.js"
       ]
     },
     "angular-ui-router": {
       "main": [
-        "release/angular-ui-router.min.js"
+        "release/angular-ui-router.js"
       ]
     },
     "jquery": {
       "main": [
-        "dist/jquery.min.js"
+        "dist/jquery.js"
       ]
     }
   }

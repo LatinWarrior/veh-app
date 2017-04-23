@@ -4,6 +4,31 @@ Hello world!
     <div class="panel-heading" style="font-size:large">
         {{::$ctrl.title}}
     </div>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <tbody>
+                        <tr ng-repeat="vehicle in $ctrl.vehicles">
+                            <td>{{vehicle.name}}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading" style="font-size:large">
+        {{::$ctrl.title}}
+    </div>
 
     <div class="panel-body">
         <div class="row">

@@ -26,7 +26,7 @@ namespace app.service {
                 .$http
                 .get(this.vehiclesUrl)
                 .then((response: any) => {
-                    const vehicles = response.data as Array<app.entity.IVehicle>;
+                    const vehicles = response.data.makes as Array<app.entity.IVehicle>;
                     console.log(`In getVehicles of data-access.services. vehicles: ${vehicles}`);
                     return vehicles;
                 });

@@ -1,3 +1,3 @@
 /// <reference path="../../../../typings/index.d.ts" />
 
-angular.module('app.service', ['app.entity', 'app.api']);
+angular.module('app.api', ['app.entity']);

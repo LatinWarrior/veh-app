@@ -12,7 +12,7 @@ namespace app {
 
         static $inject: Array<string> = ['$stateProvider', '$urlRouterProvider'];
 
-        constructor($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider){            
+        constructor($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) {
 
             let helloState = {
                 name: 'home',
@@ -44,14 +44,31 @@ namespace app {
                 template: '<vehicle-list></vehicle-list>'
             }
 
+            let vehicleModelsState = {
+                name: 'vehicle-model-list',
+                url: '/vehicles/{make}/models',
+                template: '<vehicle-model-list vehicle-models="$resolve.vehicleModels"></vehicle-model-list>',
+                resolve: {
+                    vehicleModels: function (
+                        dataAccessService: app.service.IDataAccessService,
+                        apiConfigService: app.api.IApiConfigService,
+                        $stateParams: ng.ui.IStateParams) {
+                        apiConfigService.getApiInfo().then((response: any) => {
+                            let apiKey = response.key;
+                            return dataAccessService.getVehicleModels($stateParams.make, apiKey);
+                        });
+                        
+                    }
+                }
+            }
+
             let vehicleState = {
                 name: 'vehicle',
                 url: '/vehicles/{id}',
                 template: '<vehicle></vehicle>',
                 resolve: {
-                    vehicle: function(dataAccessService: app.service.IDataAccessService, 
-                    $stateParams: ng.ui.IStateParams){
-                        var x = dataAccessService.getApiInfo();
+                    vehicle: function (dataAccessService: app.service.IDataAccessService,
+                        $stateParams: ng.ui.IStateParams) {
                         return dataAccessService.getVehicle($stateParams.id);
                     }
                 }
@@ -70,6 +87,7 @@ namespace app {
             $stateProvider.state(vehicleListState);
             $stateProvider.state(vehicleState);
             $stateProvider.state(thingsState);
+            $stateProvider.state(vehicleModelsState);
 
             $urlRouterProvider.otherwise('/');
         }
@@ -79,11 +97,15 @@ namespace app {
 
         public apiInfo: any;
 
-        static $inject: Array<string> = ['dataAccessService'];        
-        constructor(dataAccessService: app.service.IDataAccessService){    
-            dataAccessService.getApiInfo().then((response:any ) => {
-                this.apiInfo = response;
-            })
+        static $inject: Array<string> = ['apiConfigService'];
+        constructor(apiConfigService: app.api.IApiConfigService) {
+            apiConfigService
+                .getApiInfo()
+                .then((response: any) => {
+                    this.apiInfo = response;
+                }, (error: any) => {
+                    console.log('error: ', error);
+                })
         }
 
         public getApiInfo() {
@@ -95,12 +117,13 @@ namespace app {
         .module('app', [
             'app.entity',
             'app.demo',
-            'app.galaxy',            
+            'app.galaxy',
             'ui.router',
-            'app.vehicle'
-        ])        
+            'app.vehicle',
+            'app.api'
+        ])
         .config(Config);
-        //.constant('apiConstants', () => ApiConstants);        
+    //.constant('apiConstants', () => ApiConstants);        
 
     // your app setup here
 }

@@ -2,7 +2,7 @@
 
 namespace app.api {
 
-    export interface IApiConfigService {        
+    export interface IApiConfigService {
         getApiInfo: () => ng.IPromise<any>;
     }
 
@@ -10,22 +10,26 @@ namespace app.api {
 
         /*
         * Retrieves the API data from local file.
-        */       
+        */
         private apiKeyUrl: string = '.././constants/edmunds.config.json';
 
         static $inject = ['$http'];
         constructor(private $http: ng.IHttpProvider) {
             console.log(`In constructor of api-config.service`);
         }
-        
+
         getApiInfo: () => ng.IPromise<app.entity.IApiObject> = () => {
-            return this.$http.get(this.apiKeyUrl).then((response: any) => {
-                const apiKeyObject = response.data.config as app.entity.IApiObject;
-                console.log(`In getApiInfo of api-config.service. apiKeyObject: ${apiKeyObject}`);
-                return apiKeyObject;
-            });
-        }        
-    }  
+            return this.$http
+                .get(this.apiKeyUrl)
+                .then((response: any) => {
+                    const apiKeyObject = response.data.config as app.entity.IApiObject;
+                    console.log(`In getApiInfo of api-config.service. apiKeyObject: ${apiKeyObject}`);
+                    return apiKeyObject;
+                }, (error: any) => {
+                    console.log('error: ', error);
+                });
+        }
+    }
 
     angular
         .module('app.api')

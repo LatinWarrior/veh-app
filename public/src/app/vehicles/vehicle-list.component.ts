@@ -1,8 +1,5 @@
 /// <reference path="../../../../typings/index.d.ts" />
 
-// import { IVehicle } from '.././entities/vehicle.entity';
-// import { IDataAccessService, DataAccessService } from '.././services/data-access.service';
-
 namespace app.vehicle {
 
     'use strict';
@@ -10,7 +7,7 @@ namespace app.vehicle {
     interface IVehicleListBindings {
 
     }
-// 
+    // 
     interface IVehicleListController extends IVehicleListBindings {
         //vehicles: Array<app.entity.IVehicle>;
         title: string;
@@ -34,9 +31,10 @@ namespace app.vehicle {
 
             this.dataAccessService
                 .getVehicles()
-                .then((vehicles: Array<app.entity.IVehicle>) => {
-                    console.log(`In $onInit. vehicles: ${vehicles}`);
+                .then((vehicles: Array<app.entity.IVehicle>) => {                    
                     this.vehicles = vehicles;
+                }, (error: any) => {
+                    console.log('error: ', error);
                 });
         }
 

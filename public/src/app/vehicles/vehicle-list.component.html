@@ -12,8 +12,8 @@
                     <td>Name</td>                    
                     <tbody>
                         <tr ng-repeat="vehicle in $ctrl.vehicles">
-                            <td><a ui-sref="vehicle">{{vehicle.id}}</a></td>
-                            <td>{{vehicle.name}}</td>                            
+                            <td>{{vehicle.id}}</td>
+                            <td><a ui-sref="vehicle-model-list({make: '{{vehicle.name}}'})">{{vehicle.name}}</a></td>                            
                         </tr>
                     </tbody>
                 </tr>
